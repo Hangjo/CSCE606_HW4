@@ -23,3 +23,12 @@ Then /I should see all the movies/ do
     step %{I should see "#{movie.title}"}
   end
 end
+
+Then /the director of "(.*)" should be "(.*)"/ do |movie, director|
+  movie = Movie.find_by title: movie
+  expect(movie.director == director) 
+end
+
+Then /(.*) seed movies should exist/ do | n_seeds |
+  expect(Movie.count).to eq n_seeds.to_i
+end
